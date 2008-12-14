@@ -26,10 +26,9 @@
 start(_Type, _Args) ->
     twoorl_sup:start_link([]).
 
-start_phase(mysql, _, _) ->
-    {ok, DBConfig} = application:get_env(twoorl, dbconns),
+start_phase(mysql, _, DBConfigs) ->
     [mysql_connect(PoolSize, Hostname, User, Password, Database)
-     || {Hostname, User, Password, Database, PoolSize} <- DBConfig],
+     || {Hostname, User, Password, Database, PoolSize} <- DBConfigs],
     ok;
 
 start_phase(compile, _, _) ->
@@ -39,7 +38,7 @@ start_phase(compile, _, _) ->
 %% Having the mnesia store on a separate but connected node with a module
 %% to handle its maintenance would move a lot of this foo out of the
 %% application stack. Eventually that really needs to happen. -- nkg
-start_phase(mnesia, _, _) ->
+start_phase(mnesia, _, Tables) ->
     %% Mnesia should have been started already, because of that the schema
     %% is in memory if the schema doesn't already exist on disc. If so we
     %% change the type so that it writes to the mnesia dir we set. -- nkg
@@ -50,7 +49,6 @@ start_phase(mnesia, _, _) ->
             ok
     end,
     ExistingTables = mnesia:system_info(tables) -- [schema],
-    {ok, Tables} = application:get_env(twoorl, tables),
     [create_table(Table) ||
 	Table <- Tables, not lists:member(Table, ExistingTables)],
     ok.

@@ -5,15 +5,12 @@
   {registered, [twoorl]},
   {applications, [kernel, stdlib, sasl, crypto, inets, mnesia]},
   {mod, {twoorl, []}},
-  {env, [
-    {dbconns, [
-        {"localhost", "root", "password", "twoorl", 3}
-    ]},
-    {tables, [session]}
-  ]},
+  {env, []},
   {start_phases, [
-    {mysql, []},
-    {mnesia, []},
+    {mysql, [
+	{"localhost", "root", "password", "twoorl", 3}
+    ]},
+    {mnesia, [session]},
     {compile, []}
   ]}
 ]}.
