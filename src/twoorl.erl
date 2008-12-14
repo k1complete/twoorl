@@ -27,12 +27,12 @@ start(_Type, _Args) ->
     twoorl_sup:start_link([]).
 
 start_phase(mysql, _, DBConfigs) ->
-    [mysql_connect(PoolSize, Hostname, User, Password, Database)
+    [mysql_connect(Hostname, User, Password, Database, PoolSize)
      || {Hostname, User, Password, Database, PoolSize} <- DBConfigs],
     ok;
 
 start_phase(compile, _, _) ->
-    twoorl:compile(),
+    compile(),
     ok;
 
 %% Having the mnesia store on a separate but connected node with a module
@@ -57,7 +57,7 @@ create_table(session) ->
     mnesia:create_table(session, [{attributes, record_info(fields, session)}]),
     ok.
 
-mysql_connect(PoolSize, Hostname, User, Password, Database) ->
+mysql_connect(Hostname, User, Password, Database, PoolSize) ->
     erlydb:start(
       mysql, [{hostname, Hostname},
 	      {username, User},
