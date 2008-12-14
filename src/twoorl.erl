@@ -67,7 +67,7 @@ mysql_connect(PoolSize, Hostname, User, Password, Database) ->
 	      {database, Database},
 	      {logfun, fun twoorl_util:log/4}]),
     lists:foreach(
-      fun() ->
+      fun(_PoolNumber) ->
 	      mysql:connect(erlydb_mysql, Hostname, undefined, User, Password,
 			    Database, true)
       end, lists:seq(1, PoolSize - 1)).
