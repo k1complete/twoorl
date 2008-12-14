@@ -20,3 +20,8 @@ $ erl -sname twoorlapp -setcookie twoorl -mnesia dir "'twoorl.mnesia'" -yaws emb
 [ok, ok, ok, ok]
 
 # Nick Gerakines
+
+And for the lazy ones:
+$ make clean && make run
+
+# Davide :)
