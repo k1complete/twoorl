@@ -367,20 +367,24 @@ with_bundle(A, Data) ->
 bundles() ->
     [{<<"eng">>, <<"English">>, twoorl_eng},
      {<<"spa">>, <<"Español">>, twoorl_spa},
+     {<<"dk">>, <<"Dansk">>, twoorl_dk},
      {<<"deu">>, <<"Deutsch">>, twoorl_deu},
      {<<"fra">>, <<"Français">>, twoorl_fra},
+     {<<"gre">>, <<"Greek">>, twoorl_greek},
      {<<"ita">>, <<"Italiano">>, twoorl_ita},
      {<<"kor">>, <<"한국어">>, twoorl_kor},
-     {<<"pol">>, <<"Polski">>, twoorl_pol},
-     {<<"por">>, <<"Português Brasileiro">>, twoorl_por_br},
-     {<<"ru">>, <<"Русский">>, twoorl_rus},
-     {<<"sv">>, <<"Svenska">>, twoorl_sv},
-     {<<"ch">>, <<"简体中文">>, twoorl_zh_cn}].
+      {<<"pol">>, <<"Polski">>, twoorl_pol},
+      {<<"por">>, <<"Português Brasileiro">>, twoorl_por_br},
+      {<<"ru">>, <<"Русский">>, twoorl_rus},
+      {<<"sv">>, <<"Svenska">>, twoorl_sv},
+      {<<"ch">>, <<"简体中文">>, twoorl_zh_cn}].
 
 get_bundle(A) ->
     Module1 =
 	case erlyweb_util:get_cookie("lang", A) of
 	    undefined ->
+		twoorl_eng;
+	    [] ->
 		twoorl_eng;
 	    Lang ->
 		Lang1 = list_to_binary(Lang),
