@@ -43,9 +43,7 @@ bundle(Tag) ->
 
 	%% register page
 	register_cap -> <<"Zarejstruj">>;
-	username -> <<"nazwa użytkownika">>;
 	email -> <<"adres poczty elektronicznej">>;
-	password -> <<"hasło">>;
 	password2 -> <<"powtórz hasło">>;
 	already_member -> <<"Jesteś już członkiem?">>;
 %%	login_cap -> <<"Zaloguj">>;

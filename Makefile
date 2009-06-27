@@ -3,6 +3,9 @@ all: code
 code: clean
 	erl -s make all load -s init stop
 
+run:	code
+	erl -sname twoorlapp -setcookie twoorl -mnesia dir "'twoorl.mnesia'" -yaws embedded true -pa ebin -boot start_sasl -eval '[application:start(X) || X <- [inets, crypto, mnesia, twoorl]]'
+
 clean:
 	rm -fv ebin/*.beam twoorl.rel twoorl.script twoorl.boot erl_crash.dump *.log *.access
 
