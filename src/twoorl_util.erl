@@ -372,6 +372,7 @@ bundles() ->
      {<<"fra">>, <<"Français">>, twoorl_fra},
      {<<"gre">>, <<"Greek">>, twoorl_greek},
      {<<"ita">>, <<"Italiano">>, twoorl_ita},
+     {<<"ja">>, <<"日本語">>, twoorl_ja},
      {<<"kor">>, <<"한국어">>, twoorl_kor},
       {<<"pol">>, <<"Polski">>, twoorl_pol},
       {<<"por">>, <<"Português Brasileiro">>, twoorl_por_br},
